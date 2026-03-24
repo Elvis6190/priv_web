@@ -2,733 +2,118 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>菩提素 · 禪意素食 | Bodhi Vegan</title>
-    <!-- 清新風格，禪意設計 + 管理後台 -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', 'Noto Sans TC', 'Noto Sans SC', 'Roboto', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background-color: #fefaf5;
-            color: #2c3e2f;
-            line-height: 1.5;
-            scroll-behavior: smooth;
-        }
-
-        .bg-zen {
-            background: linear-gradient(135deg, #f9f3e7 0%, #eef0e3 100%);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* 導航欄 + 語言切換 */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 20px 0;
-            border-bottom: 1px solid #dad2c0;
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            color: #4a6741;
-        }
-
-        .logo p {
-            font-size: 0.85rem;
-            color: #7c6e5d;
-            letter-spacing: 1px;
-        }
-
-        .lang-switch {
-            display: flex;
-            gap: 12px;
-            background: #fff8f0;
-            padding: 6px 12px;
-            border-radius: 48px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 6px 14px;
-            border-radius: 32px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #6b5a47;
-            font-family: inherit;
-        }
-
-        .lang-btn.active {
-            background-color: #4a6741;
-            color: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .lang-btn:hover:not(.active) {
-            background-color: #e7dfd3;
-        }
-
-        /* Hero 圖片區 */
-        .hero {
-            text-align: center;
-            padding: 40px 0 20px;
-        }
-        .hero-image {
-            width: 100%;
-            max-height: 380px;
-            object-fit: cover;
-            border-radius: 32px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            margin-bottom: 24px;
-        }
-        .hero h2 {
-            font-size: 2.2rem;
-            font-weight: 300;
-            color: #3b5c30;
-            margin-bottom: 16px;
-        }
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-            color: #5e6e53;
-        }
-
-        /* 通用區塊 */
-        .section {
-            margin: 60px 0;
-        }
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 400;
-            text-align: center;
-            margin-bottom: 32px;
-            position: relative;
-            padding-bottom: 12px;
-            color: #3e5d34;
-        }
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 2px;
-            background: #b7aa8a;
-        }
-
-        /* 新聞卡片 */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .news-card {
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            transition: 0.2s;
-        }
-        .news-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .news-content {
-            padding: 20px;
-        }
-        .news-title {
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-        .news-date {
-            font-size: 0.8rem;
-            color: #8f7e68;
-            margin-bottom: 12px;
-        }
-        .news-desc {
-            font-size: 0.9rem;
-            color: #4a5a44;
-        }
-
-        /* 套餐價格區 */
-        .set-menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-        }
-        .set-card {
-            background: white;
-            border-radius: 28px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.03);
-            border: 1px solid #ede3d4;
-        }
-        .set-name {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: #4a6741;
-        }
-        .set-desc {
-            font-size: 0.85rem;
-            color: #7c6e5d;
-            margin: 10px 0;
-        }
-        .set-price {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #2b5e2f;
-        }
-
-        /* 原有價格卡片保持 */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        .price-card {
-            background: white;
-            border-radius: 32px;
-            padding: 28px 20px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-            border: 1px solid #e9e0d2;
-        }
-        .price-card:hover {
-            transform: translateY(-5px);
-        }
-        .meal-name {
-            font-size: 1.7rem;
-            font-weight: 500;
-            color: #4a6741;
-            margin-bottom: 12px;
-        }
-        .time-slot {
-            font-size: 0.9rem;
-            color: #8f7e68;
-            background: #f9f2e8;
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 40px;
-            margin-bottom: 20px;
-        }
-        .price-row {
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-            border-top: 1px dashed #e2d6c8;
-            padding-top: 18px;
-        }
-        .price-item {
-            text-align: center;
-        }
-        .day-range {
-            font-weight: 500;
-            color: #6b5a47;
-        }
-        .price-value {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #2b5e2f;
-            letter-spacing: 1px;
-        }
-        .note-list {
-            margin-top: 18px;
-            font-size: 0.8rem;
-            color: #8c7b64;
-            background: #fef7ef;
-            padding: 12px;
-            border-radius: 20px;
-            list-style: none;
-        }
-
-        /* 管理員面板 */
-        .admin-panel {
-            background: #fff8f0;
-            border-radius: 32px;
-            padding: 28px;
-            margin-top: 40px;
-            border: 1px solid #dad2c0;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-        }
-        .admin-section {
-            margin-bottom: 32px;
-        }
-        .admin-section h3 {
-            font-size: 1.4rem;
-            margin-bottom: 16px;
-            color: #3e5d34;
-            border-left: 4px solid #b7aa8a;
-            padding-left: 12px;
-        }
-        .admin-form input, .admin-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ddd2c2;
-            border-radius: 20px;
-            font-family: inherit;
-        }
-        button {
-            background-color: #4a6741;
-            border: none;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-        button:hover {
-            background-color: #2c5230;
-        }
-        .logout-btn {
-            background-color: #a67c52;
-            margin-bottom: 20px;
-        }
-        .news-item-edit, .set-item-edit {
-            background: #f5efe7;
-            border-radius: 20px;
-            padding: 12px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .delete-btn {
-            background-color: #b55b4c;
-            padding: 5px 12px;
-        }
-
-        /* 登入 overlay */
-        .login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.2s;
-        }
-        .login-overlay.active {
-            visibility: visible;
-            opacity: 1;
-        }
-        .login-card {
-            background: white;
-            padding: 32px;
-            border-radius: 48px;
-            width: 90%;
-            max-width: 380px;
-            text-align: center;
-        }
-        .login-card input {
-            width: 100%;
-            margin: 12px 0;
-            padding: 12px;
-            border-radius: 48px;
-            border: 1px solid #ccc;
-        }
-        .close-login {
-            margin-top: 16px;
-            background: #b7aa8a;
-        }
-        .contact-flex, .promo-box, footer {
-            margin-top: 30px;
-        }
-        @media (max-width: 700px) {
-            .navbar { flex-direction: column; gap: 16px; }
-            .hero h2 { font-size: 1.8rem; }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菩提素 Bodhi Vegan</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zen">
-    <div class="container">
-        <!-- 導航列 + 語言切換 -->
-        <div class="navbar">
-            <div class="logo">
-                <h1>菩提素</h1>
-                <p>Bodhi Vegan · 禪意蔬食</p>
-            </div>
-            <div class="lang-switch">
-                <button class="lang-btn active" data-lang="zh-TW">繁</button>
-                <button class="lang-btn" data-lang="zh-CN">简</button>
-                <button class="lang-btn" data-lang="en">EN</button>
+<body>
+
+    <nav>
+        <div class="logo">菩提素 BODHI VEGAN</div>
+        <div class="nav-links">
+            <a href="#home" data-key="nav_home">首頁</a>
+            <a href="#menu" data-key="nav_menu">菜單/價目</a>
+            <a href="#news" data-key="nav_news">最新消息</a>
+            <a href="#contact" data-key="nav_contact">聯絡我們</a>
+        </div>
+        <div class="lang-switcher">
+            <button onclick="setLanguage('tc')">繁</button>
+            <button onclick="setLanguage('sc')">简</button>
+            <button onclick="setLanguage('en')">EN</button>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 data-key="hero_title">健康 · 慈悲 · 美味</h1>
+        <p data-key="hero_sub">位於尖沙咀核心地帶的傳統素食風味</p>
+    </section>
+
+    <section id="menu">
+        <h2 data-key="nav_menu">菜單/價目</h2>
+        
+        <div class="pricing-card">
+            <h3 data-key="buffet_title">自助餐收費</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-key="table_time">時間</th>
+                        <th data-key="table_mon_thu">周一至周四</th>
+                        <th data-key="table_fri_sun">周五至周日/公眾假期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-key="time_lunch">11:30 - 15:00 (自助午餐)</td>
+                        <td>$100</td>
+                        <td>$118</td>
+                    </tr>
+                    <tr>
+                        <td data-key="time_tea">15:00 - 17:00 (定食下午茶)</td>
+                        <td>$69</td>
+                        <td>$69</td>
+                    </tr>
+                    <tr>
+                        <td data-key="time_dinner">17:30 - 21:00 (自助晚餐)</td>
+                        <td>$128</td>
+                        <td>$138</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="notes">
+                <p data-key="note_1">* 自助餐用餐時間90分鐘</p>
+                <p data-key="note_2">* 出示學生證減 $10 | 出示菩提學會會員證減 $20</p>
             </div>
         </div>
 
-        <!-- Hero 圖片 -->
-        <div class="hero">
-            <img class="hero-image" src="https://picsum.photos/id/30/1200/400" alt="Zen Vegetarian" style="width:100%;">
-            <h2 id="hero-title">菩提心 · 素食緣</h2>
-            <p id="hero-desc">在喧嚣尘世的一隅，菩提素餐厅宛如一方净土，静候着每一位寻求心灵与味蕾双重洗礼的旅人。</p>
-        </div>
+        <div class="set-menus-grid" id="set-menu-container">
+            </div>
+    </section>
 
-        <!-- 關於我們 -->
-        <div class="section">
-            <div class="section-title" id="about-title">關於我們</div>
-            <div class="about-grid" style="display:flex; gap:30px; flex-wrap:wrap; background:#ffffffcc; border-radius:32px; padding:28px;">
-                <div style="flex:2">
-                    <p id="about-text1">菩提素以「菩提心，素食緣」為核心理念，將傳統素齋文化與現代烹飪藝術巧妙融合，呈獻視覺與味覺的禪意盛宴。</p>
-                    <p id="about-text2" style="margin-top:16px;">禪意空間：淡雅裝潢、柔和燈光與悠揚古箏，營造遠離塵囂、回歸自然的寧靜氛圍。</p>
+    <section id="news">
+        <h2 data-key="nav_news">最新消息</h2>
+        <div id="news-list" class="grid-container"></div>
+        
+        <h2 data-key="gallery_title">餐廳環境</h2>
+        <div id="gallery-list" class="grid-container"></div>
+    </section>
+
+    <section id="contact">
+        <h2 data-key="nav_contact">聯絡我們</h2>
+        <div class="contact-grid">
+            <div>
+                <p><strong>電話:</strong> 2383 8222</p>
+                <p><strong>地址:</strong> <span data-key="address">尖沙咀金巴利道53至59號地下及一樓</span></p>
+            </div>
+            <div class="map-placeholder">
                 </div>
-                <div style="flex:1; text-align:center; font-size:4rem;">🍃 🪷</div>
-            </div>
         </div>
+    </section>
 
-        <!-- 新聞與活動區塊 -->
-        <div class="section" id="news-section">
-            <div class="section-title" id="news-title">最新消息 / 活動</div>
-            <div id="news-container" class="news-grid"></div>
-        </div>
-
-        <!-- 套餐價格 (定食/套餐) -->
-        <div class="section" id="set-menu-section">
-            <div class="section-title" id="set-title">精選套餐 · 定食價格</div>
-            <div id="set-menu-container" class="set-menu-grid"></div>
-        </div>
-
-        <!-- 自助餐價格表 (保留原有) -->
-        <div class="section">
-            <div class="section-title" id="pricing-title">自助餐時段及收費</div>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <div class="meal-name" data-key="lunch_name">自助午餐</div>
-                    <div class="time-slot">11:30 – 15:00</div>
-                    <div class="price-row">
-                        <div class="price-item"><div class="day-range" data-key="mon_thu">週一至週四</div><div class="price-value">$100</div></div>
-                        <div class="price-item"><div class="day-range" data-key="fri_sun">週五至週日</div><div class="price-value">$118</div></div>
-                    </div>
-                    <ul class="note-list"><li>🕊️ <span data-key="buffet_time">自助餐用餐時間90分鐘</span></li><li>🧾 <span data-key="receipt_lunch">出示本店收據減 $10</span></li></ul>
-                </div>
-                <div class="price-card">
-                    <div class="meal-name" data-key="tea_name">定食下午茶</div>
-                    <div class="time-slot">15:00 – 17:00</div>
-                    <div class="price-row"><div class="price-item"><div class="day-range" data-key="daily">每日</div><div class="price-value">$69</div></div></div>
-                    <ul class="note-list"><li>🍵 <span data-key="tea_service">另收加一服務費 (10% service charge)</span></li></ul>
-                </div>
-                <div class="price-card">
-                    <div class="meal-name" data-key="dinner_name">自助晚餐</div>
-                    <div class="time-slot">17:30 – 21:00</div>
-                    <div class="price-row">
-                        <div class="price-item"><div class="day-range" data-key="mon_thu_dinner">週一至週四</div><div class="price-value">$128</div></div>
-                        <div class="price-item"><div class="day-range" data-key="fri_sun_dinner">週五至週日</div><div class="price-value">$138</div></div>
-                    </div>
-                    <ul class="note-list"><li>🕊️ <span data-key="buffet_time_common">自助餐用餐時間90分鐘</span></li><li>🧾 <span data-key="receipt_dinner">出示本店收據減 $20</span></li></ul>
-                </div>
-            </div>
-            <div class="promo-box" style="background:#e7e1d4; border-radius:28px; padding:16px; text-align:center;">
-                <p>📅 <strong id="lunar_note_title">農曆初一、十五</strong> <span id="lunar_note_text">特別吉祥日 · 歡迎來電查詢</span></p>
-                <p id="special_promo">持本店消費收據，自助午餐減$10，自助晚餐減$20，共享健康素食緣。</p>
-            </div>
-        </div>
-
-        <!-- 聯絡我們 -->
-        <div class="section">
-            <div class="section-title" id="contact-title">聯絡我們</div>
-            <div class="contact-flex" style="display:flex; flex-wrap:wrap; gap:30px; background:#ffffffc9; border-radius:32px; padding:32px;">
-                <div style="flex:1; text-align:center;"><h3>📞 服務熱線</h3><p class="phone">2383 8222</p></div>
-                <div style="flex:1; text-align:center;"><h3>📍 地址</h3><p id="address">尖沙咀金巴利道53號-59號1樓</p></div>
-                <div style="flex:1; text-align:center;"><h3>🕰️ 營業時段</h3><p>午餐 11:30-15:00<br>下午茶 15:00-17:00<br>晚餐 17:30-21:00</p></div>
-            </div>
-        </div>
-        <footer style="text-align:center; padding:32px 0; border-top:1px solid #e2d6c8;">
-            <p id="footer_note">菩提素 · 以禪心烹調，以素緣相聚 | 歡迎團體預約</p>
-        </footer>
-    </div>
-
-    <!-- 登入彈窗 (僅 /login 觸發) -->
-    <div id="loginOverlay" class="login-overlay">
-        <div class="login-card">
-            <h2>Staff Login</h2>
-            <input type="text" id="loginUser" placeholder="Username" autocomplete="off">
-            <input type="password" id="loginPass" placeholder="Password">
-            <button id="doLoginBtn">登入 / Login</button>
-            <button id="closeLoginBtn" class="close-login">關閉</button>
+    <div id="login-overlay" class="modal">
+        <div class="modal-box">
+            <h3>員工登入</h3>
+            <input type="text" id="user" placeholder="帳號">
+            <input type="password" id="pass" placeholder="密碼">
+            <button onclick="doLogin()">登入</button>
+            <button onclick="closeModal()">關閉</button>
         </div>
     </div>
 
-    <!-- 管理員面板 (僅登入後可見) -->
-    <div id="adminPanel" style="display: none;" class="container">
-        <div class="admin-panel">
-            <button id="logoutBtn" class="logout-btn">🚪 登出 / Logout</button>
-            <div class="admin-section">
-                <h3>📰 編輯新聞 / 活動</h3>
-                <div id="news-admin-list"></div>
-                <div style="margin-top:20px;">
-                    <input type="text" id="newNewsTitle" placeholder="標題 / Title">
-                    <input type="text" id="newNewsDate" placeholder="日期 e.g. 2025-04-15">
-                    <textarea id="newNewsDesc" rows="2" placeholder="內容描述"></textarea>
-                    <button id="addNewsBtn">➕ 新增新聞</button>
-                </div>
-            </div>
-            <div class="admin-section">
-                <h3>🍽️ 編輯套餐價格 (定食/套餐)</h3>
-                <div id="set-admin-list"></div>
-                <div style="margin-top:20px;">
-                    <input type="text" id="newSetName" placeholder="套餐名稱">
-                    <input type="text" id="newSetDesc" placeholder="簡介 / Description">
-                    <input type="text" id="newSetPrice" placeholder="價格 e.g. HK$128">
-                    <button id="addSetBtn">➕ 新增套餐</button>
-                </div>
-            </div>
+    <div id="admin-overlay" class="modal">
+        <div class="modal-box admin-box">
+            <h3>後台管理系統</h3>
+            <select id="post-type">
+                <option value="news">新增新聞</option>
+                <option value="gallery">新增圖片</option>
+            </select>
+            <input type="text" id="post-title" placeholder="標題">
+            <input type="text" id="post-img" placeholder="圖片連結 (URL)">
+            <textarea id="post-body" placeholder="內容描述"></textarea>
+            <button onclick="submitToSheet()">發布至 Google Sheets</button>
+            <button onclick="logout()">登出</button>
         </div>
     </div>
 
-    <script>
-        // ---------- 多語言詞庫 (簡化保留原有，新增新聞與套餐key) ----------
-        const translations = {
-            "zh-TW": { hero_title:"菩提心 · 素食緣", hero_desc:"在喧嚣塵世的一隅，菩提素餐廳宛如一方淨土", about_title:"關於我們", about_text1:"菩提素以「菩提心，素食緣」為核心理念...", about_text2:"禪意空間：淡雅裝潢、柔和燈光與悠揚古箏", news_title:"最新消息 / 活動", set_title:"精選套餐 · 定食價格", pricing_title:"自助餐時段及收費", contact_title:"聯絡我們", address:"尖沙咀金巴利道53號-59號1樓", footer_note:"菩提素 · 以禪心烹調，以素緣相聚",
-            lunch_name:"自助午餐", mon_thu:"週一至週四", fri_sun:"週五至週日", buffet_time:"自助餐用餐時間90分鐘", receipt_lunch:"出示本店收據減 $10",
-            tea_name:"定食下午茶", daily:"每日", tea_service:"另收加一服務費", dinner_name:"自助晚餐", mon_thu_dinner:"週一至週四", fri_sun_dinner:"週五至週日", buffet_time_common:"自助餐用餐時間90分鐘", receipt_dinner:"出示本店收據減 $20",
-            lunar_note_title:"農曆初一、十五", lunar_note_text:"特別吉祥日 · 歡迎來電查詢", special_promo:"持本店消費收據，自助午餐減$10，自助晚餐減$20" },
-            "zh-CN": { hero_title:"菩提心 · 素食缘", hero_desc:"在喧嚣尘世的一隅，菩提素餐厅宛如一方净土", about_title:"关于我们", about_text1:"菩提素以“菩提心，素食缘”为核心理念...", about_text2:"禅意空间：淡雅装潢、柔和灯光与悠扬古筝", news_title:"最新消息 / 活动", set_title:"精选套餐 · 定食价格", pricing_title:"自助餐时段及收费", contact_title:"联系我们", address:"尖沙咀金巴利道53号-59号1楼", footer_note:"菩提素 · 以禅心烹调，以素缘相聚",
-            lunch_name:"自助午餐", mon_thu:"周一至周四", fri_sun:"周五至周日", buffet_time:"自助餐用餐时间90分钟", receipt_lunch:"出示本店收据减 ¥10",
-            tea_name:"定食下午茶", daily:"每日", tea_service:"另收加一服务费", dinner_name:"自助晚餐", mon_thu_dinner:"周一至周四", fri_sun_dinner:"周五至周日", buffet_time_common:"自助餐用餐时间90分钟", receipt_dinner:"出示本店收据减 ¥20",
-            lunar_note_title:"农历初一、十五", lunar_note_text:"特别吉祥日 · 欢迎来电查询", special_promo:"持本店消费收据，自助午餐减¥10，自助晚餐减¥20" },
-            "en": { hero_title:"Bodhi Heart · Veggie Destiny", hero_desc:"Amidst the bustling world, Bodhi Vegan offers a pure sanctuary", about_title:"About Us", about_text1:"Bodhi Vegan blends traditional vegetarian culture with modern art...", about_text2:"Zen ambiance: elegant décor, soft lighting, and guzheng music", news_title:"News & Events", set_title:"Set Menu Prices", pricing_title:"Buffet Hours & Prices", contact_title:"Contact Us", address:"1/F, 53-59 Kimberley Road, Tsim Sha Tsui", footer_note:"Bodhi Vegan · Zen cooking, mindful gathering",
-            lunch_name:"Lunch Buffet", mon_thu:"Mon-Thu", fri_sun:"Fri-Sun", buffet_time:"90-min dining", receipt_lunch:"$10 off with receipt", tea_name:"Afternoon Tea Set", daily:"Daily", tea_service:"10% service charge", dinner_name:"Dinner Buffet", mon_thu_dinner:"Mon-Thu", fri_sun_dinner:"Fri-Sun", buffet_time_common:"90-min dining", receipt_dinner:"$20 off with receipt",
-            lunar_note_title:"1st & 15th Lunar", lunar_note_text:"Auspicious days, call for details", special_promo:"$10 off lunch / $20 off dinner with receipt" }
-        };
-
-        let currentLang = "zh-TW";
-        // 資料儲存
-        let newsList = [];     // {title, date, desc, image?}
-        let setMenuList = [];  // {name, desc, price}
-        let isAdmin = false;
-
-        // ---------- Google Sheets 紀錄 (請自行部署 Apps Script 並替換URL) ----------
-        const GOOGLE_SHEET_LOG_URL = "https://script.google.com/macros/s/AKfycbzXXXXXXXXXXXX/exec"; // 使用者自行替換
-        function logToSheet(action, detail) {
-            // 模擬發送，若未設定正確URL則console記錄
-            if(GOOGLE_SHEET_LOG_URL.includes("AKfycbzXXXXXXXXXXXX")) {
-                console.log("[LOG]", action, detail);
-                return;
-            }
-            fetch(GOOGLE_SHEET_LOG_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({action, detail, timestamp: new Date().toISOString()})
-            }).catch(e=>console.warn);
-        }
-
-        // 載入本地儲存資料
-        function loadData() {
-            const savedNews = localStorage.getItem("bodhi_news");
-            if(savedNews) newsList = JSON.parse(savedNews);
-            else newsList = [
-                {title:"春季禪修茶會", date:"2025-04-20", desc:"與法師一同品茶參禪，體驗蔬食之美。"},
-                {title:"地球日素食優惠", date:"2025-04-22", desc:"全日自助餐八折，響應環保。"}
-            ];
-            const savedSets = localStorage.getItem("bodhi_sets");
-            if(savedSets) setMenuList = JSON.parse(savedSets);
-            else setMenuList = [
-                {name:"吉祥定食", desc:"時令蔬菜・五行湯・糙米飯", price:"HK$88"},
-                {name:"菩提套餐", desc:"日式素壽司・味噌湯・抹茶甜品", price:"HK$128"}
-            ];
-            renderNews();
-            renderSetMenu();
-        }
-        function saveNews() { localStorage.setItem("bodhi_news", JSON.stringify(newsList)); renderNews(); if(isAdmin) renderAdminNews(); logToSheet("update_news", "編輯新聞");}
-        function saveSets() { localStorage.setItem("bodhi_sets", JSON.stringify(setMenuList)); renderSetMenu(); if(isAdmin) renderAdminSets(); logToSheet("update_setmenu", "編輯套餐");}
-
-        function renderNews() {
-            const container = document.getElementById("news-container");
-            if(!container) return;
-            container.innerHTML = newsList.map(n => `
-                <div class="news-card">
-                    <img class="news-img" src="https://picsum.photos/id/${Math.floor(Math.random()*30)+20}/300/180" alt="news">
-                    <div class="news-content">
-                        <div class="news-title">${n.title}</div>
-                        <div class="news-date">${n.date || ""}</div>
-                        <div class="news-desc">${n.desc}</div>
-                    </div>
-                </div>
-            `).join("");
-        }
-        function renderSetMenu() {
-            const container = document.getElementById("set-menu-container");
-            container.innerHTML = setMenuList.map(s => `
-                <div class="set-card">
-                    <div class="set-name">${s.name}</div>
-                    <div class="set-desc">${s.desc}</div>
-                    <div class="set-price">${s.price}</div>
-                </div>
-            `).join("");
-        }
-
-        function renderAdminNews() {
-            const adminDiv = document.getElementById("news-admin-list");
-            if(!adminDiv) return;
-            adminDiv.innerHTML = newsList.map((n,idx)=>`
-                <div class="news-item-edit">
-                    <div><strong>${n.title}</strong> ${n.date}<br><small>${n.desc.substring(0,40)}</small></div>
-                    <div><button class="delete-btn" data-idx="${idx}" data-type="news">刪除</button></div>
-                </div>
-            `).join("");
-            document.querySelectorAll(".delete-btn[data-type='news']").forEach(btn => {
-                btn.addEventListener("click", (e)=>{
-                    let idx = parseInt(btn.dataset.idx);
-                    newsList.splice(idx,1);
-                    saveNews();
-                    renderAdminNews();
-                });
-            });
-        }
-        function renderAdminSets() {
-            const adminDiv = document.getElementById("set-admin-list");
-            if(!adminDiv) return;
-            adminDiv.innerHTML = setMenuList.map((s,idx)=>`
-                <div class="news-item-edit">
-                    <div><strong>${s.name}</strong> ${s.price}<br><small>${s.desc}</small></div>
-                    <div><button class="delete-set" data-idx="${idx}">刪除</button></div>
-                </div>
-            `).join("");
-            document.querySelectorAll(".delete-set").forEach(btn => {
-                btn.addEventListener("click", (e)=>{
-                    let idx = parseInt(btn.dataset.idx);
-                    setMenuList.splice(idx,1);
-                    saveSets();
-                    renderAdminSets();
-                });
-            });
-        }
-
-        // 管理員新增
-        function addNews() {
-            let title = document.getElementById("newNewsTitle").value.trim();
-            let date = document.getElementById("newNewsDate").value.trim();
-            let desc = document.getElementById("newNewsDesc").value.trim();
-            if(title && desc) { newsList.unshift({title,date,desc}); saveNews(); renderAdminNews(); 
-                document.getElementById("newNewsTitle").value=""; document.getElementById("newNewsDate").value=""; document.getElementById("newNewsDesc").value="";}
-        }
-        function addSet() {
-            let name = document.getElementById("newSetName").value.trim();
-            let desc = document.getElementById("newSetDesc").value.trim();
-            let price = document.getElementById("newSetPrice").value.trim();
-            if(name && price) { setMenuList.push({name,desc,price}); saveSets(); renderAdminSets();
-                document.getElementById("newSetName").value=""; document.getElementById("newSetDesc").value=""; document.getElementById("newSetPrice").value="";}
-        }
-
-        // 登入邏輯
-        function showLogin() { document.getElementById("loginOverlay").classList.add("active"); }
-        function hideLogin() { document.getElementById("loginOverlay").classList.remove("active"); }
-        function doLogin() {
-            let user = document.getElementById("loginUser").value;
-            let pwd = document.getElementById("loginPass").value;
-            if(user === "Admin" && pwd === "Admin") {
-                isAdmin = true;
-                sessionStorage.setItem("admin_auth", "true");
-                hideLogin();
-                document.getElementById("adminPanel").style.display = "block";
-                renderAdminNews(); renderAdminSets();
-                logToSheet("admin_login", "Admin logged in");
-                alert("登入成功 / Login success");
-            } else { alert("帳號或密碼錯誤 / Wrong credentials"); }
-        }
-        function logout() {
-            isAdmin = false;
-            sessionStorage.removeItem("admin_auth");
-            document.getElementById("adminPanel").style.display = "none";
-            logToSheet("admin_logout", "Admin logged out");
-        }
-
-        // 路由監聽 /login
-        function checkRoute() {
-            if(window.location.hash === "#/login" || window.location.pathname.endsWith("/login")) {
-                showLogin();
-            }
-        }
-        window.addEventListener("hashchange", checkRoute);
-        window.addEventListener("load", ()=>{
-            loadData();
-            checkRoute();
-            const auth = sessionStorage.getItem("admin_auth");
-            if(auth === "true") { isAdmin=true; document.getElementById("adminPanel").style.display="block"; renderAdminNews(); renderAdminSets(); }
-            // 語言初始化
-            updateLanguage("zh-TW");
-            // 按鈕事件
-            document.getElementById("doLoginBtn").addEventListener("click", doLogin);
-            document.getElementById("closeLoginBtn").addEventListener("click", hideLogin);
-            document.getElementById("logoutBtn")?.addEventListener("click", logout);
-            document.getElementById("addNewsBtn")?.addEventListener("click", addNews);
-            document.getElementById("addSetBtn")?.addEventListener("click", addSet);
-        });
-
-        function updateLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang];
-            for(let key in t) {
-                let el = document.getElementById(key);
-                if(el && typeof t[key] === "string") el.innerText = t[key];
-                else {
-                    document.querySelectorAll(`[data-key="${key}"]`).forEach(e=>e.innerText=t[key]);
-                }
-            }
-            document.querySelectorAll("#news-title, #set-title, #pricing-title, #contact-title, #about-title, #hero-title, #hero-desc, #footer_note").forEach(el=>{
-                if(el.id === "news-title") el.innerText = t.news_title;
-                if(el.id === "set-title") el.innerText = t.set_title;
-                if(el.id === "pricing-title") el.innerText = t.pricing_title;
-                if(el.id === "contact-title") el.innerText = t.contact_title;
-                if(el.id === "about-title") el.innerText = t.about_title;
-                if(el.id === "hero-title") el.innerText = t.hero_title;
-                if(el.id === "hero-desc") el.innerText = t.hero_desc;
-                if(el.id === "footer_note") el.innerText = t.footer_note;
-                if(el.id === "address") el.innerText = t.address;
-            });
-            document.querySelectorAll("[data-key]").forEach(el=>{
-                let k = el.getAttribute("data-key");
-                if(t[k]) el.innerText = t[k];
-            });
-            document.getElementById("lunar_note_title").innerText = t.lunar_note_title;
-            document.getElementById("lunar_note_text").innerText = t.lunar_note_text;
-            document.getElementById("special_promo").innerText = t.special_promo;
-        }
-        document.querySelectorAll(".lang-btn").forEach(btn=>{
-            btn.addEventListener("click",()=>{
-                let lang = btn.dataset.lang;
-                if(lang==="zh-TW") updateLanguage("zh-TW");
-                else if(lang==="zh-CN") updateLanguage("zh-CN");
-                else updateLanguage("en");
-                document.querySelectorAll(".lang-btn").forEach(b=>b.classList.remove("active"));
-                btn.classList.add("active");
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
